@@ -10,6 +10,7 @@ import useAuth from '../hooks/useAuth';
 import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import UserManagement from '../screens/UserManagement';
+import OrderDetailsScreen from '../screens/OrderDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,7 @@ export default function AppNavigation() {
           <Stack.Screen name="ChangePassword" options={{ headerShown: false }} component={ChangePasswordScreen} />
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
           <Stack.Screen name="UserManagement" options={{ headerShown: false }} component={UserManagement} />
+          <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     )

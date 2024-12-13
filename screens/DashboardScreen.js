@@ -60,6 +60,15 @@ export default function DashboardScreen() {
         )}
       />
       <TouchableOpacity
+        onPress={() => navigation.navigate('OrderDetails')}
+        className="py-3 mx-7 mb-10"
+        style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
+        <Text className="text-xl font-bold text-center text-white">
+          Detalles de Ordenes
+        </Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity
         onPress={() => navigation.navigate('UserManagement')}
         className="py-3 mx-7 mb-10"
         style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
