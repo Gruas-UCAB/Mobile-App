@@ -20,31 +20,36 @@ export default function LoginScreen() {
           <Image source={require('../assets/images/loginimg.png')} 
           style={{width: 220, height: 200}} />
         </View>
-        
-        
+
       </SafeAreaView>
       <View 
-        style={{borderTopLeftRadius: 50, borderTopRightRadius: 50}} 
-        className="flex-1 bg-white px-8 pt-8">
+        className="flex-1 px-8 pt-8"
+        style={{ backgroundColor: '#0f101b', borderTopLeftRadius: 50, borderTopRightRadius: 50 }}>
           <View className="form space-y-2">
-            <Text className="text-gray-700 ml-4">Correo</Text>
+            <Text className="text-white ml-4">Correo</Text>
             <TextInput 
-              className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+              className="p-4 border border-[#2f303d] text-gray-700 rounded-2xl mb-3 bg-transparent"
               placeholder="Correo"
+              placeholderTextColor="#2f303d"
               // value="" 
             />
-            <Text className="text-gray-700 ml-4">Contraseña</Text>
+            <Text className="text-white ml-4">Contraseña</Text>
             <TextInput 
-              className="p-4 bg-gray-100 text-gray-700 rounded-2xl"
+              className="p-4 border border-[#2f303d] text-gray-700 rounded-2xl mb-3 bg-transparent"
               secureTextEntry
               placeholder="Contraseña"
+              placeholderTextColor="#2f303d"
               // value="" 
             />
-            <TouchableOpacity className="flex items-end">
-              <Text className="text-gray-700 mb-5">Olvidó su Constraseña?</Text>
-            </TouchableOpacity>
             <TouchableOpacity 
-              className="py-3 bg-blue-500 rounded-xl">
+            onPress={()=> navigation.navigate('RecoveryPassword')}
+            className="flex items-end">
+              <Text className="text-white mb-5">Olvidó su Constraseña?</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              className="py-3"
+              style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
                 <Text 
                     className="text-xl font-bold text-center text-white"
                 >

@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
+import PasswordRecoveryScreen from '../screens/PasswordRecoveryScreen';
 import LoginScreen from '../screens/LoginScreen';
 import useAuth from '../hooks/useAuth';
 
@@ -28,6 +29,7 @@ export default function AppNavigation() {
         <Stack.Navigator initialRouteName='Bienvenido'>
           <Stack.Screen name="Welcome" options={{headerShown: false}} component={WelcomeScreen} />
           <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
+          <Stack.Screen name="RecoveryPassword" options={{ headerShown: false }} component={PasswordRecoveryScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     )
