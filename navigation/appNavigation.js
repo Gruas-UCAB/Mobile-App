@@ -11,6 +11,7 @@ import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import UserManagement from '../screens/UserManagement';
 import OrderDetailsScreen from '../screens/OrderDetailsScreen';
+import ServiceCompletedScreen from '../screens/ServiceCompletedScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,7 @@ export default function AppNavigation() {
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
           <Stack.Screen name="UserManagement" options={{ headerShown: false }} component={UserManagement} />
           <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} />
+          <Stack.Screen name="ServiceCompleted" component={ServiceCompletedScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     )
