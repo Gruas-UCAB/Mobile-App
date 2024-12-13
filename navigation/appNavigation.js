@@ -9,6 +9,7 @@ import LoginScreen from '../screens/LoginScreen';
 import useAuth from '../hooks/useAuth';
 import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import DashboardScreen from '../screens/DashboardScreen';
+import UserManagement from '../screens/UserManagement';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export default function AppNavigation() {
         <Stack.Navigator initialRouteName='Inicio'>
           <Stack.Screen name="Login" options={{headerShown: false}} component={HomeScreen} />
           <Stack.Screen name="ChangePassword" options={{ headerShown: false }} component={ChangePasswordScreen} />
+          <Stack.Screen name="UserManagement" options={{ headerShown: false }} component={UserManagement} />
         </Stack.Navigator>
       </NavigationContainer>
     )
@@ -35,6 +37,7 @@ export default function AppNavigation() {
           <Stack.Screen name="RecoveryPassword" options={{ headerShown: false }} component={PasswordRecoveryScreen} />
           <Stack.Screen name="ChangePassword" options={{ headerShown: false }} component={ChangePasswordScreen} />
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
+          <Stack.Screen name="UserManagement" options={{ headerShown: false }} component={UserManagement} />
         </Stack.Navigator>
       </NavigationContainer>
     )
