@@ -48,16 +48,10 @@ export default function ServiceCompletedScreen() {
         value={notes}
         onChangeText={setNotes}
       />
-      
-      <TextInput
-        className="p-4 border border-[#2f303d] text-gray-700 rounded-2xl mb-3 bg-transparent"
-        placeholder="Costos adicionales (opcional)"
-        placeholderTextColor="#2f303d"
-        value={additionalCosts}
-        onChangeText={setAdditionalCosts}
-        keyboardType="numeric"
-      />
-      
+      <TouchableOpacity onPress={() => navigation.navigate('AditionalCost')} className="py-3 mb-2" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
+        <Text className="text-xl font-bold text-center text-white">Costos Adicionales</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity onPress={handleSubmit} className="py-3 mb-2" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
         <Text className="text-xl font-bold text-center text-white">Enviar Confirmación</Text>
       </TouchableOpacity>

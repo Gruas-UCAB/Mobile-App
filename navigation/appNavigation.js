@@ -12,6 +12,7 @@ import DashboardScreen from '../screens/DashboardScreen';
 import UserManagement from '../screens/UserManagement';
 import OrderDetailsScreen from '../screens/OrderDetailsScreen';
 import ServiceCompletedScreen from '../screens/ServiceCompletedScreen';
+import AditionalCostScreen from '../screens/AditionalCostScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,7 @@ export default function AppNavigation() {
           <Stack.Screen name="UserManagement" options={{ headerShown: false }} component={UserManagement} />
           <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} />
           <Stack.Screen name="ServiceCompleted" component={ServiceCompletedScreen} />
+          <Stack.Screen name="AditionalCost" component={AditionalCostScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     )
