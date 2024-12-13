@@ -14,6 +14,7 @@ import OrderDetailsScreen from '../screens/OrderDetailsScreen';
 import ServiceCompletedScreen from '../screens/ServiceCompletedScreen';
 import AditionalCostScreen from '../screens/AditionalCostScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
+import ErrorScreen from '../screens/ErrorScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -47,6 +48,7 @@ export default function AppNavigation() {
           <Stack.Screen name="ServiceCompleted" component={ServiceCompletedScreen} />
           <Stack.Screen name="AditionalCost" component={AditionalCostScreen} />
           <Stack.Screen name="Notifications" component={NotificationsScreen} />
+          <Stack.Screen name="Error" options={{ headerShown: false }} component={ErrorScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     )

@@ -61,6 +61,15 @@ export default function DashboardScreen() {
       />
 
       <TouchableOpacity
+        onPress={() => navigation.navigate('Error')}
+        className="py-3 mx-7 mb-10"
+        style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
+        <Text className="text-xl font-bold text-center text-white">
+          Para probar la pantalla de error
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
         onPress={() => navigation.navigate('Notifications')}
         className="py-3 mx-7 mb-10"
         style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
