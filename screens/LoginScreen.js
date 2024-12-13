@@ -24,7 +24,7 @@ export default function LoginScreen() {
       </SafeAreaView>
       <View 
         className="flex-1 px-8 pt-8"
-        style={{ backgroundColor: '#0f101b', borderTopLeftRadius: 50, borderTopRightRadius: 50 }}>
+        style={{ backgroundColor: themeColors.bg2, borderTopLeftRadius: 50, borderTopRightRadius: 50 }}>
           <View className="form space-y-2">
             <Text className="text-white ml-4">Correo</Text>
             <TextInput 
