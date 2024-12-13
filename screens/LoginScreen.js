@@ -48,6 +48,7 @@ export default function LoginScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity 
+              onPress={()=> navigation.navigate('Dashboard')}
               className="py-3"
               style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
                 <Text 

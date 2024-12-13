@@ -8,6 +8,7 @@ import PasswordRecoveryScreen from '../screens/PasswordRecoveryScreen';
 import LoginScreen from '../screens/LoginScreen';
 import useAuth from '../hooks/useAuth';
 import ChangePasswordScreen from '../screens/ChangePasswordScreen';
+import DashboardScreen from '../screens/DashboardScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,7 @@ export default function AppNavigation() {
           <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
           <Stack.Screen name="RecoveryPassword" options={{ headerShown: false }} component={PasswordRecoveryScreen} />
           <Stack.Screen name="ChangePassword" options={{ headerShown: false }} component={ChangePasswordScreen} />
+          <Stack.Screen name="Dashboard" component={DashboardScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     )
