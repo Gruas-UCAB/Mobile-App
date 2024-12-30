@@ -1,27 +1,30 @@
-import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { themeColors } from '../theme';
-import { ArrowLeftIcon } from 'react-native-heroicons/solid'
+import Icon from 'react-native-vector-icons/AntDesign';
+import { LinearGradient } from 'expo-linear-gradient';
+import styles from '../styles/ErrorStyles.js';
+import React from 'react';
 
 export default function ErrorScreen() {
-  const navigation = useNavigation();
-
   const handleRetry = () => {
-    // TODO: Implementar lógica para reintentar la conexión
     console.log('Reintentar conexión');
   };
 
   return (
-    <View className="flex-1" style={{ backgroundColor: themeColors.bg, justifyContent: 'center', alignItems: 'center', padding: 30 }}>
-    <TouchableOpacity onPress={()=> navigation.goBack()} 
-    className=" p-2 rounded-tr-2xl rounded-bl-2xl ml-4">
-    <ArrowLeftIcon size="20" color="black" />
-    </TouchableOpacity>
-      <Text style={{ color: '#000', fontSize: 18, fontWeight: 'bold', marginBottom: 20 }}>Sin conexión a internet</Text>
-      
-      <TouchableOpacity onPress={handleRetry} className="p-4 mb-2" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-        <Text className="text-xl font-bold text-center text-white">Reintentar</Text>
+    <View style={styles.container}>
+      <Icon name="warning" size={150} color="#FF7F0A" style={styles.icon} />
+
+      <Text style={styles.errorText}>Error!</Text>
+      <Text style={styles.descriptionText}>Algo salió super mal</Text>
+
+      <TouchableOpacity onPress={handleRetry} activeOpacity={0.7}>
+        <LinearGradient
+          colors={['#FF7F0A', '#FF3D0A']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.saveButton}
+        >
+          <Text style={styles.saveButtonText}>Recargar</Text>
+        </LinearGradient>
       </TouchableOpacity>
     </View>
   );

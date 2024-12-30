@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Switch } from 'react-native';
+import { MaterialIcons, FontAwesome5, Feather, Entypo } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, Switch, Image } from 'react-native';
+import { ArrowLeftIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
-import { themeColors } from '../theme';
+import styles from '../styles/UserManagementStyles';
 import { auth } from '../config/firebase';
-import { ArrowLeftIcon } from 'react-native-heroicons/solid'
+import React, { useState } from 'react';
 
 export default function UserManagement() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [pushNotifications, setPushNotifications] = useState(false);
+  const [notificaciones, setNotificaciones] = useState(false);
   const [emailNotifications, setEmailNotifications] = useState(false);
   const navigation = useNavigation();
 
@@ -20,52 +19,60 @@ export default function UserManagement() {
     });
   };
 
-  const handleSaveSettings = () => {
-    console.log('Configuraciones guardadas:', {
-      username,
-      password,
-      pushNotifications,
-      emailNotifications,
-    });
-    navigation.goBack()
-  };
-
   return (
-    <View className="flex-1 border-[#2f303d]" style={{ backgroundColor: themeColors.bg2, justifyContent: 'center', alignItems: 'center', paddingTop: 100 }}>
+    <View style={styles.container}>
+      <TouchableOpacity 
+        onPress={() => navigation.goBack()} 
+        style={styles.backButton}
+      >
+        <ArrowLeftIcon size={24} color="#000" marginTop={20}/>
+        <Text style={styles.backText}>Atrás</Text>
+      </TouchableOpacity>
+      <View style={styles.header}>
+        <Image
+          source={{ uri: 'https://img.icons8.com/?size=100&id=42215&format=png&color=000000' }}
+          style={styles.profileImage}
+        />
+        <Text style={styles.profileName}>Myke Tyson</Text>
+        <Text style={styles.profileId}>ABC-1234</Text>
+      </View>
 
-    <View className="flex-row justify-start">
-        <TouchableOpacity onPress={()=> navigation.goBack()} 
-        className=" p-2 rounded-tr-2xl rounded-bl-2xl ml-4">
-        <ArrowLeftIcon size="20" color="white" />
-        </TouchableOpacity>
-    </View>
+      <View>
+        <Text style={styles.sectionTitle}>Preferencias</Text>
+        <View style={styles.preferenceOption}>
+          <View style={styles.optionContent}>
+            <Entypo name="notification" size={24} color="#777" />
+            <Text style={styles.optionText}>Notificaciones</Text>
+          </View>
+          <Switch  style={styles.optionButton} value={notificaciones} onValueChange={setNotificaciones} />
+        </View>
+        <View style={styles.preferenceOption}>
+          <View style={styles.optionContent}>
+            <FontAwesome5 name="envelope" size={24} color="#777" />
+            <Text style={styles.optionText}>Notificaciones por Email</Text>
+          </View>
+          <Switch value={emailNotifications} onValueChange={setEmailNotifications} />
+        </View>
+      </View>
 
-      <View className="flex-1 px-8 pt-8" style={{ backgroundColor: '#0f101b', borderTopLeftRadius: 50, borderTopRightRadius: 50 }}>
-        <Text className="text-white text-3xl font-bold text-center mb-5">Configuración del Usuario</Text>
-        <View className="flex-row justify-between items-center mb-3">
-          <Text className="text-white">Notificaciones Push</Text>
-          <Switch
-            value={pushNotifications}
-            onValueChange={setPushNotifications}
-          />
-        </View>
-        <View className="flex-row justify-between items-center mb-3">
-          <Text className="text-white">Notificaciones por Email</Text>
-          <Switch
-            value={emailNotifications}
-            onValueChange={setEmailNotifications}
-          />
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate('ChangePassword')} className="py-3 mb-2 mt-4" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-          <Text className="text-xl font-bold text-center text-white">Cambiar Contraseña</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSaveSettings} className="py-3 mb-2 mt-4" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-          <Text className="text-xl font-bold text-center text-white">Guardar Configuraciones</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleLogout} className="py-3 mt-5" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-          <Text className="text-xl font-bold text-center text-white">Cerrar Sesión</Text>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>General</Text>
+        <TouchableOpacity style={styles.option} onPress={() => navigation.navigate('ChangePassword')}>
+          <View style={styles.optionContent}>
+            <MaterialIcons name="key" size={24} color="#777" />
+            <Text style={styles.optionText}>Cambiar Contraseña</Text>
+          </View>
+            <Feather name="chevron-right" size={24} color="#777" />
         </TouchableOpacity>
       </View>
+
+      <TouchableOpacity
+        onPress={handleLogout}
+        style={styles.logoutButton}
+      >
+        <MaterialIcons name="logout" size={24} color="#FF0000" />
+        <Text style={styles.logoutButtonText}>Cerrar Sesión</Text>
+      </TouchableOpacity>
     </View>
   );
 }

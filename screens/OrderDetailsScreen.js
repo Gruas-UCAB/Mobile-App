@@ -1,90 +1,206 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { 
+  View, 
+  Text, 
+  TouchableOpacity, 
+  StyleSheet, 
+  Modal, 
+  TextInput, 
+  ScrollView 
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
-import { themeColors } from '../theme';
+import { FontAwesome } from '@expo/vector-icons';
+import styles from '../styles/OrderDetailsStyles';
+import Geocoder from 'react-native-geocoding';
 
-export default function OrderDetailsScreen({ route }) {
-  const defaultOrder = {
-    location: 'Calle Falsa 123',
-    type: 'Accidente',
-    estimatedTime: '15 minutos',
-    insuredName: 'Juan Pérez',
-    policyNumber: 'ABC123456',
-    latitude: 37.78825,
-    longitude: -122.4324,
+export default function OrderDetailsScreen() {
+  const navigation = useNavigation(); 
+
+  const order = {
+    name: 'Carlos Perez',
+    date: 'May 29, 2020',
+    time: '8:30 AM',
+    vehicle: '2020 Ford Ecosport',
+    vin: 'AEK00E',
+    color: 'Brown',
+    address: 'Sambil la Candelaria, Caracas, Venezuela',
   };
 
-  const { order = defaultOrder } = route.params || {};
-  const [orderStatus, setOrderStatus] = useState(null);
+  const [orderLocation, setOrderLocation] = useState({
+    latitude: 10.4806,
+    longitude: -66.9036,
+  });
+  
+  const [loading, setLoading] = useState(true);
   const [rejectionReason, setRejectionReason] = useState('');
-  const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [isOrderRejected, setIsOrderRejected] = useState(false); 
+  const [estimatedTime, setEstimatedTime] = useState(0); 
 
-  console.log('Order:', order); // Agrega esta línea para verificar el contenido de order
+  useEffect(() => {
+    let isMounted = true; 
 
-  const handleAcceptOrder = () => {
-    setOrderStatus('accepted');
+    Geocoder.init("AIzaSyAEzlFUYYgDgPPud2V75M2rXjd8LP3MIX4"); 
+
+    Geocoder.from(order.address)
+      .then(json => {
+        if (isMounted) { 
+          const location = json.results[0].geometry.location;
+          setOrderLocation({
+            latitude: location.lat,
+            longitude: location.lng,
+          });
+          setLoading(false);
+        }
+      })
+      .catch(error => {
+        if (isMounted) {
+          console.warn(error);
+          setLoading(false);
+        }
+      });
+
+    return () => { isMounted = false }; 
+  }, []);
+
+  useEffect(() => {
+    if (!isOrderRejected) {
+      const timer = setInterval(() => {
+        setEstimatedTime(prevTime => prevTime + 1);
+      }, 1000);
+
+      return () => clearInterval(timer); 
+    }
+  }, [isOrderRejected]);
+
+  const handleStart = useCallback(() => {
+    
+    
+    console.log('Service Started');
+    
+    navigation.navigate('ServiceCompleted');
+  }, [navigation]);
+
+  const handleReject = () => {
+    setModalVisible(true); 
   };
 
-  const handleRejectOrder = () => {
-    setOrderStatus('rejected');
+  const handleSaveRejection = () => {
+    console.log('Rejection Reason:', rejectionReason);
+    setModalVisible(false); 
+    setRejectionReason(''); 
+    setIsOrderRejected(true); 
   };
 
-  const handleStartService = () => {
-    console.log('Servicio iniciado');
-    navigation.navigate('Dashboard');
+  const formatTime = (timeInSeconds) => {
+    const hours = Math.floor(timeInSeconds / 3600);
+    const minutes = Math.floor((timeInSeconds % 3600) / 60);
+    const seconds = timeInSeconds % 60;
+    return `${hours.toString().padStart(2, '0')}:${minutes
+      .toString()
+      .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>Cargando mapa...</Text>
+      </View>
+    );
+  }
 
   return (
-    <View className="flex-1" style={{ backgroundColor: themeColors.bg }}>
-      <View className="p-4" style={{ backgroundColor: themeColors.bg2 }}>
-        <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Detalles de la Orden</Text>
-      </View>
-      <View className="p-4">
-        <Text style={{ color: '#000' }}>Ubicación: {order.location}</Text>
-        <Text style={{ color: '#000' }}>Tipo de Incidente: {order.type}</Text>
-        <Text style={{ color: '#000' }}>Tiempo Estimado de Llegada: {order.estimatedTime}</Text>
-        <Text style={{ color: '#000' }}>Nombre del Asegurado: {order.insuredName}</Text>
-        <Text style={{ color: '#000' }}>Número de Póliza: {order.policyNumber}</Text>
-      </View>
+    <View style={styles.container}>
+
+      <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
+        <FontAwesome name="close" size={18} color="#777" />
+      </TouchableOpacity>
+
       <MapView
-        style={{ flex: 1 }}
-        initialRegion={{
-          latitude: order.latitude,
-          longitude: order.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+        style={styles.map}
+        region={{
+          latitude: orderLocation.latitude,
+          longitude: orderLocation.longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         }}
       >
         <Marker
-          coordinate={{ latitude: order.latitude, longitude: order.longitude }}
-          title="Ubicación del Incidente"
+          coordinate={{ latitude: orderLocation.latitude, longitude: orderLocation.longitude }}
+          title="Ubicación de Recogida"
+          description={order.address}
         />
       </MapView>
-      {orderStatus === null && (
-        <View className="p-4">
-          <TouchableOpacity onPress={handleAcceptOrder} className="py-3 mb-2" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-            <Text className="text-xl font-bold text-center text-white">Aceptar Orden</Text>
+
+      <View style={styles.detailsContainer}>
+        <Text style={styles.timer}>{formatTime(estimatedTime)}</Text>
+      </View>
+
+      <View style={styles.contentWrapper}>
+        <ScrollView contentContainerStyle={styles.infoScrollView}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.name}>{order.name}</Text>
+            <Text style={styles.text}>{order.address}</Text>
+
+            <View style={styles.section}>
+              <Text style={styles.label}>Detalles de Orden</Text>
+              <Text style={styles.text}>Hora Requerida: {order.time}</Text>
+              <Text style={styles.text}>Fecha: {order.date}</Text>
+            </View>
+
+            <View style={styles.section}>
+              <Text style={styles.label}>Información del Vehículo</Text>
+              <Text style={styles.text}>Vehículo: {order.vehicle}</Text>
+              <Text style={styles.text}>Placa: {order.vin}</Text>
+              <Text style={styles.text}>Color: {order.color}</Text>
+            </View>
+          </View>
+        </ScrollView>
+
+        <View style={styles.bottomContainer}>
+          <TouchableOpacity style={styles.rejectButton} onPress={handleReject}>
+            <FontAwesome name="ban" size={24} color="#FF7F0A" /> 
+            <Text style={styles.rejectButtonText}>Rechazar</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleRejectOrder} className="py-3 mb-2" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-            <Text className="text-xl font-bold text-center text-white">Rechazar Orden</Text>
+
+          <TouchableOpacity
+            style={[styles.startButton, isOrderRejected && styles.disabledButton]}
+            onPress={handleStart} 
+            disabled={isOrderRejected}
+          >
+            <FontAwesome name="location-arrow" size={24} color="white" />
+            <Text style={styles.startButtonText}>Iniciar</Text>
           </TouchableOpacity>
-          {orderStatus === 'rejected' && (
+        </View>
+      </View>
+
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalLabel}>Razón de Rechazo</Text>
             <TextInput
-              className="p-4 border border-[#2f303d] text-gray-700 rounded-2xl mb-3 bg-transparent"
-              placeholder="Explicación de por qué se rechaza"
-              placeholderTextColor="#2f303d"
+              style={styles.textInput}
+              placeholder="Ingresa la razón"
               value={rejectionReason}
               onChangeText={setRejectionReason}
             />
-          )}
+            <View style={styles.modalButtonsContainer}>
+              <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
+                <Text style={styles.modalButtonText}>Cancelar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.modalButton} onPress={handleSaveRejection}>
+                <Text style={styles.modalButtonText}>Guardar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-      )}
-      {orderStatus === 'accepted' && (
-        <TouchableOpacity onPress={handleStartService} className="py-3 mb-2" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-          <Text className="text-xl font-bold text-center text-white">Iniciar Servicio</Text>
-        </TouchableOpacity>
-      )}
+      </Modal>
     </View>
   );
 }

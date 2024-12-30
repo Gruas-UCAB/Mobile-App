@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation, DrawerActions } from '@react-navigation/native';
-import { themeColors } from '../theme';
+import { useNavigation } from '@react-navigation/native';
+import styles from '../styles/DashboardStyles.js';
+import { Ionicons } from '@expo/vector-icons';
 
 const ordersData = [
   { id: '1', location: 'Ubicación 1', type: 'Incidente 1', estimatedTime: '10 mins', status: 'active' },
@@ -13,6 +19,7 @@ const ordersData = [
 export default function DashboardScreen() {
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState('active');
+  
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -21,89 +28,100 @@ export default function DashboardScreen() {
   }, [filter]);
 
   const handleRefresh = () => {
-    // TODO: Falta implementar la lógica para actualizar la lista de órdenes
+    // TODO: Falta lógica del refresh
     console.log('Lista de órdenes actualizada');
   };
 
+  const renderOrder = ({ item }) => (
+    <View style={styles.orderCard}>
+      <View style={styles.orderHeader}>
+        <Ionicons name="location-outline" size={20} color="#FF3D0A" />
+        <Text style={styles.orderTitle}>Ubicación: {item.location}</Text>
+      </View>
+      <Text style={styles.orderText}>Tipo: {item.type}</Text>
+      <Text style={styles.orderText}>Tiempo Estimado: {item.estimatedTime}</Text>
+      <View style={styles.statusContainer}>
+        <View style={[styles.statusIndicator, getStatusStyle(item.status)]} />
+        <Text style={styles.statusText}>{capitalize(item.status)}</Text>
+      </View>
+    </View>
+  );
+
+  const getStatusStyle = (status) => {
+    switch (status) {
+      case 'active':
+        return { backgroundColor: '#4CAF50' }; 
+      case 'completed':
+        return { backgroundColor: '#2196F3' }; 
+      case 'rejected':
+        return { backgroundColor: '#F44336' }; 
+      default:
+        return { backgroundColor: '#ffffff' }; 
+    }
+  };
+
+  const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+
   return (
-    <SafeAreaView className="flex-1" style={{ backgroundColor: themeColors.bg }}>
-      <View className="flex-row justify-between p-4" style={{ backgroundColor: themeColors.bg2 }}>
-        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-          {/* TODO: Hacer la logica del menu */}
-          <Text style={{ color: '#fff' }}>Menú</Text>
-        </TouchableOpacity>
-        <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Dashboard del Conductor</Text>
-        <TouchableOpacity onPress={handleRefresh}>
-          <Text style={{ color: '#fff' }}>Actualizar</Text>
-        </TouchableOpacity>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.headerContainer}>
+        <View style={styles.headerLeftIcons}>
+          <TouchableOpacity onPress={handleRefresh} style={styles.iconButton}>
+            <Ionicons name="refresh-outline" size={24} color="#FF3D0A" />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.headerText}>Dashboard del Conductor</Text>
+        <View style={styles.headerRightIcons}>
+          <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={styles.iconButton}>
+            <Ionicons name="notifications-outline" size={28} color="#FF3D0A" />
+          </TouchableOpacity>
+        </View>
       </View>
-      <View className="flex-row justify-around p-4">
-        <TouchableOpacity onPress={() => setFilter('active')}>
-          <Text style={{ color: filter === 'active' ? '#f39d03' : '#000' }}>Activas</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setFilter('completed')}>
-          <Text style={{ color: filter === 'completed' ? '#f39d03' : '#000' }}>Completadas</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setFilter('rejected')}>
-          <Text style={{ color: filter === 'rejected' ? '#f39d03' : '#000' }}>Rechazadas</Text>
-        </TouchableOpacity>
+
+      <View style={styles.filterContainer}>
+        {[{ label: 'Activo', value: 'active' }, { label: 'Completado', value: 'completed' }, { label: 'Rechazado', value: 'rejected' }].map(status => (
+          <TouchableOpacity
+            key={status.value}
+            onPress={() => setFilter(status.value)}
+            style={[styles.filterButton, filter === status.value && styles.activeFilterButton]}
+          >
+            <Text
+              style={[styles.filterText, filter === status.value && styles.activeFilterText]}
+            >
+              {status.label}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
+
       <FlatList
         data={orders}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <View className="p-4 m-2" style={{ backgroundColor: themeColors.bg2, borderRadius: 10 }}>
-            <Text style={{ color: '#fff' }}>Ubicación: {item.location}</Text>
-            <Text style={{ color: '#fff' }}>Tipo: {item.type}</Text>
-            <Text style={{ color: '#fff' }}>Tiempo Estimado: {item.estimatedTime}</Text>
+        renderItem={renderOrder}
+        contentContainerStyle={styles.listContent}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>No hay órdenes para mostrar.</Text>
           </View>
-        )}
+        }
       />
 
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Error')}
-        className="py-3 mx-7 mb-10"
-        style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-        <Text className="text-xl font-bold text-center text-white">
-          Para probar la pantalla de error
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Notifications')}
-        className="py-3 mx-7 mb-10"
-        style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-        <Text className="text-xl font-bold text-center text-white">
-          Notificaciones
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={() => navigation.navigate('ServiceCompleted')}
-        className="py-3 mx-7 mb-10"
-        style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-        <Text className="text-xl font-bold text-center text-white">
-          Confirmar Orden
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={() => navigation.navigate('OrderDetails')}
-        className="py-3 mx-7 mb-10"
-        style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-        <Text className="text-xl font-bold text-center text-white">
-          Detalles de Ordenes
-        </Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity
-        onPress={() => navigation.navigate('UserManagement')}
-        className="py-3 mx-7 mb-10"
-        style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-        <Text className="text-xl font-bold text-center text-white">
-          Detalles de Usuario
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.footerContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('OrderDetails')}
+          style={styles.footerIcon}
+        >
+          <Ionicons name="document-text-outline" size={32} color="#fc8404" />
+          <Text style={styles.footerText}>Orden</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('UserManagement')}
+          style={styles.footerIcon}
+        >
+          <Ionicons name="people-outline" size={32} color="#fc8404" />
+          <Text style={styles.footerText}>Usuario</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }

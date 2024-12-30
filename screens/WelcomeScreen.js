@@ -1,52 +1,60 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { themeColors } from '../theme'
-import { useNavigation } from '@react-navigation/native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import styles from '../styles/WelcomeStyles';
+import React from 'react';
 
 export default function WelcomeScreen() {
     const navigation = useNavigation();
-  return (
-    <LinearGradient 
-    colors={[
-        '#1D1E28',
-        '#1D1E28',
-        '#0f101b',
-        '#0f101b',
-        '#0f101b']}
-    style={{flex: 1}}
-    >
-        <SafeAreaView className="flex-1">
-            <View className="flex-1 flex justify-around my-12">
-                <Text 
-                    className="text-black font-bold text-5xl text-center"
-                    style={{ color: '#fff' }}>
-                    Bienvenido
-                </Text>
-                <View className="flex-row justify-center">
-                    <Image source={require("../assets/images/wl.png")}
-                        style={{width: 350, height: 350}} />
-                </View>
-                <View className="space-y-4">
-                    <TouchableOpacity
-                        onPress={()=> navigation.navigate('Login')}
-                        className="py-3 mx-7"
-                        style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-                            <Text 
-                                className="text-xl font-bold text-center text-white">
-                                Iniciar Sesion
-                            </Text>
+    return (
+        <ImageBackground
+            style={styles.container}
+            resizeMode="cover"
+        >
+            <SafeAreaView style={styles.safeArea}>
+                <View style={styles.content}>
+                    <View style={styles.logoContainer}>
+                        <Image 
+                            source={require("../assets/images/logo.png")}
+                            style={styles.logo} 
+                            resizeMode="contain"
+                        />
+                    </View>
+                    
+                    <View style={styles.textContainer}>
+                        <Text style={styles.title}>
+                            GRUAS UCAB
+                        </Text>
+                        <Text style={styles.subtitle}>
+                            Tu grúa a solo un toque de distancia
+                        </Text>
+                    </View>
+                    
+                    <Text style={styles.other}>
+                        Vamos a comenzar
+                    </Text>     
+                    <TouchableOpacity 
+                            onPress={() => navigation.navigate('Login')} 
+                            activeOpacity={0.7}
+                            style={styles.buttonWrapper}>
+                            <LinearGradient
+                                colors={['#FF7F0A', '#FF3D0A']}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}
+                                style={styles.saveButton}>
+                                <Icon name="sign-in" size={20} color="#ffffff" style={styles.buttonIcon} />
+                                <Text style={styles.saveButtonText}>Iniciar Sesión</Text>
+                            </LinearGradient>
                     </TouchableOpacity>
-                    <View className="flex-row justify-center">
-                        <Text className="text-white font-light"> No tienes una cuenta?</Text>
-                        
-                        <Text className="font-medium" style={{ color: '#f39d03' }}> Contacta a tu administrador</Text>
+                    
+                    <View style={styles.footerTextContainer}>
+                        <Text style={styles.footerText}>¿No tienes una cuenta? </Text>
+                        <Text style={styles.contactText}>Contacta a tu administrador</Text>
                     </View>
                 </View>
-            </View>
-        </SafeAreaView>
-    </LinearGradient>
-  )
+            </SafeAreaView>
+        </ImageBackground>
+    );
 }

@@ -1,67 +1,83 @@
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { ArrowLeftIcon } from 'react-native-heroicons/solid'
-import { themeColors } from '../theme'
-import { useNavigation } from '@react-navigation/native'
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { ArrowLeftIcon } from 'react-native-heroicons/solid';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
+import styles from '../styles/LoginStyles';
+import React, { useState } from 'react';
 
-export default function LoginScreen() {
+export default function App() {
   const navigation = useNavigation();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <View className="flex-1 bg-white" style={{backgroundColor: themeColors.bg}}>
-      <SafeAreaView  className="flex ">
-        <View className="flex-row justify-start">
-          <TouchableOpacity onPress={()=> navigation.goBack()} 
-          className=" p-2 rounded-tr-2xl rounded-bl-2xl ml-4">
-            <ArrowLeftIcon size="20" color="black" />
+    <View color={'#fff'} style={styles.container}>
+      <TouchableOpacity 
+        onPress={() => navigation.goBack()} 
+        style={styles.backButton}
+      >
+        <ArrowLeftIcon size={24} color="#000" style={styles.backIcon} />
+        <Text style={styles.backText}>Atrás</Text>
+      </TouchableOpacity>
+
+      <Image
+        source={require('../assets/images/logo.png')}
+        style={styles.loginImage}
+        resizeMode="contain"
+      />
+
+      <View style={styles.logoContainer}>
+        <Text style={styles.title}>UCAB</Text>
+        <Text style={styles.subtitle}>Bienvenido nuevamente</Text>
+      </View>
+
+      <View style={styles.inputContainer}>
+        <View style={styles.inputWrapper}>
+          <MaterialCommunityIcons name="account-outline" size={20} color="#777" />
+          <TextInput
+            placeholder="Usuario"
+            placeholderTextColor="#777"
+            style={styles.input}
+          />
+        </View>
+        <View style={styles.inputWrapper}>
+          <MaterialCommunityIcons name="lock-outline" size={20} color="#777" />
+          <TextInput
+            placeholder="Contraseña"
+            placeholderTextColor="#777"
+            style={styles.input}
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity onPress={togglePasswordVisibility}>
+            <MaterialCommunityIcons
+              name={showPassword ? "eye" : "eye-off"}
+              size={20}
+              color="#777"
+            />
           </TouchableOpacity>
         </View>
-        <View  className="flex-row justify-center">
-          <Image source={require('../assets/images/loginimg.png')} 
-          style={{width: 220, height: 200}} />
-        </View>
+      </View>
 
-      </SafeAreaView>
-      <View 
-        className="flex-1 px-8 pt-8"
-        style={{ backgroundColor: themeColors.bg2, borderTopLeftRadius: 50, borderTopRightRadius: 50 }}>
-          <View className="form space-y-2">
-            <Text className="text-white ml-4">Correo</Text>
-            <TextInput 
-              className="p-4 border border-[#2f303d] text-gray-700 rounded-2xl mb-3 bg-transparent"
-              placeholder="Correo"
-              placeholderTextColor="#2f303d"
-              // value="" 
-            />
-            <Text className="text-white ml-4">Contraseña</Text>
-            <TextInput 
-              className="p-4 border border-[#2f303d] text-gray-700 rounded-2xl mb-3 bg-transparent"
-              secureTextEntry
-              placeholder="Contraseña"
-              placeholderTextColor="#2f303d"
-              // value="" 
-            />
-            <TouchableOpacity 
-            onPress={()=> navigation.navigate('RecoveryPassword')}
-            className="flex items-end">
-              <Text className="text-white mb-5">Olvidó su Constraseña?</Text>
-            </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Dashboard')} activeOpacity={0.7}>
+        <LinearGradient
+          colors={['#FF7F0A', '#FF3D0A']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.saveButton}
+        >
+          <Text style={styles.saveButtonText}>Iniciar Sesion</Text>
+        </LinearGradient>
+      </TouchableOpacity>
 
-            <TouchableOpacity 
-              onPress={()=> navigation.navigate('Dashboard')}
-              className="py-3"
-              style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-                <Text 
-                    className="text-xl font-bold text-center text-white"
-                >
-                        Iniciar Sesion
-                </Text>
-             </TouchableOpacity>
-            
-          </View>
-
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={()=> navigation.navigate('RecoveryPassword')}>
+          <Text style={styles.footerText}>recuperar contraseña?</Text>
+        </TouchableOpacity>
       </View>
     </View>
-    
-  )
+  );
 }

@@ -4,10 +4,10 @@
     "slug": "app-ui",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/icon.png",
+      "image": "./assets/images/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,18 +19,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/images/logo.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.amparoobando.appui"
     },
     "web": {
-      "favicon": "./assets/icon.png"
+      "favicon": "./assets/images/logo.png"
     },
     "extra": {
       "eas": {
         "projectId": "c42b57dc-e82a-411d-b730-73088c654cde"
       }
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

@@ -1,46 +1,50 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { themeColors } from '../theme';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { ArrowLeftIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
-import {ArrowLeftIcon} from 'react-native-heroicons/solid'
+import { LinearGradient } from 'expo-linear-gradient';
+import styles from '../styles/PasswordRecoveryStyles';
+import React, { useState } from 'react';
 
-export default function PasswordRecoveryScreen() {
-  const [email, setEmail] = useState('');
+export default function PasswordChangeScreen() {
   const navigation = useNavigation();
 
-  const handlePasswordRecovery = () => {
-    console.log('Email para recuperación de contraseña:', email);
-    navigation.navigate('Login');
-  };
-
   return (
-    <View className="flex-1 border-[#0f101b]" style={{ backgroundColor: themeColors.bg2, justifyContent: 'center', alignItems: 'center', paddingTop: 100 }}>
-      <View className="flex-row justify-start" style={{ alignItems: 'left' }}>
-        <TouchableOpacity onPress={()=> navigation.goBack()} 
-        className=" p-2 rounded-tr-2xl rounded-bl-2xl ml-4">
-          <ArrowLeftIcon size="20" color="white" />
-        </TouchableOpacity>
-      </View>
-      
+    <View style={styles.container}>
 
-      <View className="flex-1 px-8 pt-8" style={{ backgroundColor: '#0f101b', borderTopLeftRadius: 50, borderTopRightRadius: 50 }}>
-        <Text className="text-white text-3xl font-bold text-center mb-5 ">Recuperar Contraseña</Text>
-        <Text className="text-white mb-4 pt-4">
-          Por favor, ingresa tu correo electrónico para recibir un enlace de recuperación de contraseña.
-        </Text>
-        <TextInput
-          className="p-4 border border-[#2f303d] text-gray-700 rounded-2xl mb-3 bg-transparent"
-          placeholder="Ingresa tu correo electrónico"
-          placeholderTextColor="#2f303d"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <TouchableOpacity onPress={()=> navigation.navigate('ChangePassword')} className="py-3 mb-2 mt-4" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-          <Text className="text-xl font-bold text-center text-white">Recuperar Contraseña</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity 
+        onPress={() => navigation.goBack()} 
+        style={styles.backButton}
+      >
+        <ArrowLeftIcon size={24} color="#000" />
+        <Text style={styles.backText}>Atrás</Text>
+      </TouchableOpacity>
+
+      <Image 
+        source={{ uri: 'https://img.icons8.com/?size=100&id=50827&format=png&color=000000' }}
+        style={styles.icon}
+      />
+      <Text style={styles.title}>Recuperar Contraseña</Text>
+      <Text style={styles.subtitle}>
+        Ingresa tu nueva correo abajo, te enviaremos un correo para recuperar tu contraseña.
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Correo Electrónico"
+        placeholderTextColor="#BDBDBD"
+        secureTextEntry
+      />
+
+      <TouchableOpacity onPress={()=> navigation.navigate('ChangePassword')} activeOpacity={0.7}>
+        <LinearGradient
+          colors={['#FF7F0A', '#FF3D0A']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.saveButton}
+        >
+          <Text style={styles.saveButtonText}>Recuperar</Text>
+        </LinearGradient>
+      </TouchableOpacity>
     </View>
   );
 }

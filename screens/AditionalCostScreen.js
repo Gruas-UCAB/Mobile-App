@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import styles from '../styles/AditionalCostStyles';
 import * as ImagePicker from 'expo-image-picker';
-import { themeColors } from '../theme';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
 
 export default function AditionalCostScreen() {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [image, setImage] = useState(null);
-  const [status, setStatus] = useState('pendiente');
-  const navigation = useNavigation();
-
-  const handlePickImage = async () => {
+  const [imageUri, setImageUri] = useState(null);
+  const [status, setStatus] = useState('aprobada');  
+  
+  const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -19,54 +19,71 @@ export default function AditionalCostScreen() {
       quality: 1,
     });
 
-    if (!result.canceled) {
-      setImage(result.uri);
+    if (!result.cancelled) {
+      setImageUri(result.uri);
     }
   };
 
   const handleSubmit = () => {
-    console.log('Costos Adicionales:', {
-      description,
-      amount,
-      image,
-      status,
-    });
-    // TODO: Implementar lógica para enviar los costos adicionales para aprobación
-    navigation.goBack();
+    if (description === '' || amount === '') {
+      Alert.alert('Error', 'Por favor, completa todos los campos.');
+    } else {
+      
+      setStatus('Pendiente');
+      Alert.alert('Solicitud Enviada', 'Tu solicitud está en espera de aprobación.');
+    }
   };
 
   return (
-    <View className="flex-1" style={{ backgroundColor: themeColors.bg, padding: 20 }}>
-      <Text style={{ color: '#000', fontSize: 18, fontWeight: 'bold', marginBottom: 20 }}>Costos Adicionales</Text>
-      
+    <View style={styles.container}>
+      <Image
+        source={require('../assets/icons/cost.png')}
+        style={styles.loginImage}
+        resizeMode="contain"
+      />
+
+      <Text style={styles.title}>Registrar Costo Adicional</Text>
+
       <TextInput
-        className="p-4 border border-[#2f303d] text-gray-700 rounded-2xl mb-3 bg-transparent"
+        style={styles.input}
         placeholder="Descripción del costo adicional"
-        placeholderTextColor="#2f303d"
         value={description}
         onChangeText={setDescription}
+        multiline
       />
-      
+
       <TextInput
-        className="p-4 border border-[#2f303d] text-gray-700 rounded-2xl mb-3 bg-transparent"
+        style={styles.input}
         placeholder="Monto"
-        placeholderTextColor="#2f303d"
+        keyboardType="numeric"
         value={amount}
         onChangeText={setAmount}
-        keyboardType="numeric"
       />
-      
-      <TouchableOpacity onPress={handlePickImage} className="py-3 mb-2" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-        <Text className="text-xl font-bold text-center text-white">Adjuntar Foto</Text>
+
+      <TouchableOpacity style={styles.imagePickerButton} onPress={pickImage}>
+        <Ionicons name="camera" size={24} color="#777" />
+        <Text style={styles.imagePickerText}>
+          {imageUri ? 'Cambiar Foto' : 'Adjuntar Foto'}
+        </Text>
       </TouchableOpacity>
-      
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, marginBottom: 20 }} />}
-      
-      <TouchableOpacity onPress={handleSubmit} className="py-3 mb-2" style={{ backgroundColor: '#f39d03', borderRadius: 15 }}>
-        <Text className="text-xl font-bold text-center text-white">Enviar para aprobación</Text>
+
+      {imageUri && <Image source={{ uri: imageUri }} style={styles.imagePreview} />}
+
+      <Text style={[styles.statusText, styles[status.toLowerCase()]]}>
+        Estado: {status}
+      </Text>
+
+
+      <TouchableOpacity onPress={handleSubmit} activeOpacity={0.7}>
+        <LinearGradient
+          colors={['#FF7F0A', '#FF3D0A']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.saveButton}
+        >
+          <Text style={styles.saveButtonText}>Enviar para Aprobación</Text>
+        </LinearGradient>
       </TouchableOpacity>
-      
-      <Text style={{ color: '#000', fontSize: 16, marginTop: 20 }}>Estado de la solicitud: {status}</Text>
     </View>
   );
 }

@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,9 +15,7 @@ import AditionalCostScreen from '../screens/AditionalCostScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import ErrorScreen from '../screens/ErrorScreen';
 
-
 const Stack = createNativeStackNavigator();
-
 
 export default function AppNavigation() {
   const { user } = useAuth();
@@ -42,16 +39,15 @@ export default function AppNavigation() {
           <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
           <Stack.Screen name="RecoveryPassword" options={{ headerShown: false }} component={PasswordRecoveryScreen} />
           <Stack.Screen name="ChangePassword" options={{ headerShown: false }} component={ChangePasswordScreen} />
-          <Stack.Screen name="Dashboard" component={DashboardScreen} />
+          <Stack.Screen name="Dashboard" options={{headerShown: false}} component={DashboardScreen} />
           <Stack.Screen name="UserManagement" options={{ headerShown: false }} component={UserManagement} />
-          <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} />
-          <Stack.Screen name="ServiceCompleted" component={ServiceCompletedScreen} />
-          <Stack.Screen name="AditionalCost" component={AditionalCostScreen} />
-          <Stack.Screen name="Notifications" component={NotificationsScreen} />
+          <Stack.Screen name="OrderDetails" options={{headerShown: false}} component={OrderDetailsScreen} />
+          <Stack.Screen name="ServiceCompleted" options={{headerShown: false}} component={ServiceCompletedScreen} />
+          <Stack.Screen name="AditionalCost" options={{headerShown: false}} component={AditionalCostScreen} />
+          <Stack.Screen name="Notifications" options={{headerShown: false}} component={NotificationsScreen} />
           <Stack.Screen name="Error" options={{ headerShown: false }} component={ErrorScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     )
   }
-  
 }
