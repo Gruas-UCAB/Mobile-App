@@ -6,18 +6,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F8F8',
     padding: 20,
   },
-  backButton: {
-    marginTop: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  backText: {
-    marginLeft: 5,
-    fontSize: 16,
-    color: '#000',
-    marginTop: 20,
-    marginLeft: 5,
+  exitButton: {
+    position: 'absolute',
+    top: 40, 
+    left: 20,
+    zIndex: 10, 
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 90,
   },
   header: {
     marginTop: 50,

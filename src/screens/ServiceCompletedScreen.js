@@ -43,7 +43,7 @@ export default function ServiceCompletedScreen() {
     <View style={styles.container}>
       
       <Image
-        source={require('../assets/icons/confirm.png')}
+        source={require('../../assets/icons/confirm.png')}
         style={styles.loginImage}
         resizeMode="contain"
       />

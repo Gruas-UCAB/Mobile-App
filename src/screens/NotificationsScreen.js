@@ -1,17 +1,17 @@
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeftIcon } from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { db } from '../config/firebase';
+import { db } from '../../config/firebase';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import styles from '../styles/NotificationStyles';
+import { FontAwesome } from '@expo/vector-icons';
+
 
 export default function NotificationsScreen() {
     const [notifications, setNotifications] = useState([]);
     const navigation = useNavigation();
 
-    // Obtener las notificaciones ordenadas por timestamp desde Firebase
     useEffect(() => {
         const q = query(collection(db, 'notification'), orderBy('timestamp', 'desc'));
         const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -25,7 +25,6 @@ export default function NotificationsScreen() {
         return () => unsubscribe();
     }, []);
 
-    // Cambiar el estado de "leído"
     const toggleReadStatus = (id) => {
         setNotifications(
             notifications.map((notif) =>
@@ -34,7 +33,6 @@ export default function NotificationsScreen() {
         );
     };
 
-    // Renderizar una notificación
     const renderNotification = ({ item }) => {
         return (
             <View style={[styles.notificationCard, item.read && styles.readNotification]}>
@@ -57,13 +55,9 @@ export default function NotificationsScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={styles.backButton}
-            >
-                <ArrowLeftIcon size={24} color="#000" marginTop={20} />
-                <Text style={styles.backText}>Atrás</Text>
-            </TouchableOpacity>
+        <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
+            <FontAwesome name="close" size={18} color="#777" />
+        </TouchableOpacity>
 
             <View style={styles.header}>
                 <Text style={styles.headerText}>Notificaciones</Text>

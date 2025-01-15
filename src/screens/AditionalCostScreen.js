@@ -37,7 +37,7 @@ export default function AditionalCostScreen() {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/icons/cost.png')}
+        source={require('../../assets/icons/cost.png')}
         style={styles.loginImage}
         resizeMode="contain"
       />

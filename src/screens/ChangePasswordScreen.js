@@ -40,7 +40,7 @@ export default function ChangePasswordScreen() {
         <Image 
           marginTop={30} 
           marginBottom={5}
-          source={require('../assets/icons/password-icon.png')}
+          source={require('../../assets/icons/password-icon.png')}
           style={styles.keyIcon}
         />
       </View>

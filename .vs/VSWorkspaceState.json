@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\config",
-    "\\hooks",
-    "\\screens"
+    ""
   ],
-  "SelectedNode": "\\config\\firebase.js",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
