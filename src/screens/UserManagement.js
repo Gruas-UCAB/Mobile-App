@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
 
-
 export default function UserManagement() {
     const [notificaciones, setNotificaciones] = useState(false);
     const [emailNotifications, setEmailNotifications] = useState(false);
@@ -14,23 +13,24 @@ export default function UserManagement() {
 
     const handleLogout = async () => {
         try {
-            const token = await AsyncStorage.getItem('userToken');
-            if (token) {
-                await AsyncStorage.removeItem('userToken');
-                navigation.navigate('Welcome');
-            }
+            await AsyncStorage.removeItem('userToken');
+            console.log('Token eliminado correctamente');
+            await AsyncStorage.removeItem('userId');
+            console.log('ID de usuario eliminado correctamente');
+            await AsyncStorage.removeItem('name');
+            console.log('Nombre de usuario eliminado correctamente');
+            navigation.navigate('Login'); // Navega a la pantalla de inicio de sesión
         } catch (error) {
-            console.error('Error al cerrar sesión:', error);
-            Alert.alert('Error', 'Hubo un problema al cerrar sesión.');
+            console.error('Error al eliminar los datos del usuario:', error);
         }
     };
 
     return (
         <View style={styles.container}>
 
-        <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
-            <FontAwesome name="close" size={18} color="#777" />
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
+                <FontAwesome name="close" size={18} color="#777" />
+            </TouchableOpacity>
 
             <View style={styles.header}>
                 <Image

@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\screens\\OrderDetailsScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:screens\\OrderDetailsScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\LoginScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\screens\\LoginScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\screens\\UserManagement.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:screens\\UserManagement.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\UserManagement.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\screens\\UserManagement.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\screens\\LoginScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:screens\\LoginScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\DashboardScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\screens\\DashboardScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\enviroments.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:enviroments.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,40 +43,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "OrderDetailsScreen.js",
-              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\screens\\OrderDetailsScreen.js",
-              "RelativeDocumentMoniker": "screens\\OrderDetailsScreen.js",
-              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\screens\\OrderDetailsScreen.js",
-              "RelativeToolTip": "screens\\OrderDetailsScreen.js",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "LoginScreen.js",
+              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\LoginScreen.js",
+              "RelativeDocumentMoniker": "src\\screens\\LoginScreen.js",
+              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\LoginScreen.js",
+              "RelativeToolTip": "src\\screens\\LoginScreen.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-01-15T15:22:27.452Z",
+              "WhenOpened": "2025-01-20T23:06:36.288Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "UserManagement.js",
-              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\screens\\UserManagement.js",
-              "RelativeDocumentMoniker": "screens\\UserManagement.js",
-              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\screens\\UserManagement.js",
-              "RelativeToolTip": "screens\\UserManagement.js",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAAACkAAAAvAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\UserManagement.js",
+              "RelativeDocumentMoniker": "src\\screens\\UserManagement.js",
+              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\UserManagement.js",
+              "RelativeToolTip": "src\\screens\\UserManagement.js",
+              "ViewState": "AgIAACkAAAAAAAAAAAAQwFIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-01-15T15:12:48.898Z",
+              "WhenOpened": "2025-01-20T23:02:47.165Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "LoginScreen.js",
-              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\screens\\LoginScreen.js",
-              "RelativeDocumentMoniker": "screens\\LoginScreen.js",
-              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\screens\\LoginScreen.js",
-              "RelativeToolTip": "screens\\LoginScreen.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Title": "DashboardScreen.js",
+              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\DashboardScreen.js",
+              "RelativeDocumentMoniker": "src\\screens\\DashboardScreen.js",
+              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\DashboardScreen.js",
+              "RelativeToolTip": "src\\screens\\DashboardScreen.js",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAQwG8AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-01-15T15:04:56.691Z",
+              "WhenOpened": "2025-01-20T22:57:56.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "enviroments.js",
+              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\enviroments.js",
+              "RelativeDocumentMoniker": "enviroments.js",
+              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\enviroments.js",
+              "RelativeToolTip": "enviroments.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-01-20T22:54:13.184Z",
               "EditorCaption": ""
             }
           ]

@@ -1,0 +1,1 @@
+export const API_KEY = 'https://1fe4-2a0d-5600-49-b000-b2a1-ffbc-5039-9058.ngrok-free.app';

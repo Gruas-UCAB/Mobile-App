@@ -6,18 +6,23 @@ import styles from '../styles/LoginStyles';
 import React, { useState } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_KEY } from '../../enviroments';
 
 const authenticateUser = async (email, password) => {
     try {
-        const response = await axios.post('https://c8da-2a0d-5600-6-2000-2fbf-eeb-7a3c-c8ed.ngrok-free.app/auth/login', {
+        const response = await axios.post(`${API_KEY}/users-ms/auth/login`, {
             email,
             password,
         });
 
         if (response.status === 200) {
-            const { token } = response.data;
+            const { token, user } = response.data;
+            const userId = user.userId;
+            const name = user.name;
             await AsyncStorage.setItem('userToken', token);
-            return token;
+            await AsyncStorage.setItem('userId', userId);
+            await AsyncStorage.setItem('name', name);
+            return { token, userId, name };
         } else {
             Alert.alert('Error', 'Credenciales incorrectas.');
             return null;
@@ -36,9 +41,10 @@ export default function LoginScreen() {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async () => {
-        const token = await authenticateUser(email, password);
-        if (token) {
-            navigation.navigate('Dashboard', { token });
+        const result = await authenticateUser(email, password);
+        if (result) {
+            const { token, userId, name } = result; // Asegurarse de obtener 'name' de 'result'
+            navigation.navigate('Dashboard', { token, userId, name });
         } else {
             Alert.alert('Error', 'Inicio de sesión fallido.');
         }
