@@ -19,7 +19,7 @@ export default function UserManagement() {
             console.log('ID de usuario eliminado correctamente');
             await AsyncStorage.removeItem('name');
             console.log('Nombre de usuario eliminado correctamente');
-            navigation.navigate('Login'); // Navega a la pantalla de inicio de sesión
+            navigation.navigate('Login');
         } catch (error) {
             console.error('Error al eliminar los datos del usuario:', error);
         }

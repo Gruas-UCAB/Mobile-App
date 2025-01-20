@@ -15,7 +15,9 @@ import moment from 'moment';
 import { FontAwesome } from '@expo/vector-icons';
 import { API_KEY } from '../../enviroments';
 
-export default function DashboardScreen() {
+// TODO: Agregar Filtrado
+
+export default function HistoricOrderScreen() {
     const [orders, setOrders] = useState([]);
     const [filter, setFilter] = useState('active');
     const [userId, setUserId] = useState(null);
@@ -60,8 +62,10 @@ export default function DashboardScreen() {
         fetchUserData();
     }, []);
 
-    const handleRefreshLocation = () => {
-        
+    const handleRefresh = () => {
+        if (userId && token) {
+            fetchOrders(userId, token);
+        }
     };
 
     const renderOrder = ({ item }) => (
@@ -80,16 +84,13 @@ export default function DashboardScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
+                <FontAwesome name="close" size={18} color="#777" />
+            </TouchableOpacity>
                 <View style={styles.headerLeftIcons}>
-                    <TouchableOpacity onPress={handleRefreshLocation} style={styles.iconButton}>
-                        <FontAwesome name="map" size={18} color="#FF3D0A" />
-                    </TouchableOpacity>
                 </View>
-                <Text style={styles.headerText}>Bienvenido, {userName}</Text>
+                <Text style={styles.headerText}>Historial de Ordenes</Text>
                 <View style={styles.headerRightIcons}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={styles.iconButton}>
-                        <Ionicons name="notifications-outline" size={28} color="#FF3D0A" />
-                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -100,27 +101,10 @@ export default function DashboardScreen() {
                 contentContainerStyle={styles.listContent}
                 ListEmptyComponent={
                     <View style={styles.emptyContainer}>
-                        <Text style={styles.emptyText}>No tienes ordenes asignadas por el momento.</Text>
+                        <Text style={styles.emptyText}>No hay órdenes para mostrar.</Text>
                     </View>
                 }
             />
-
-            <View style={styles.footerContainer}>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('HistoricOrder')}
-                    style={styles.footerIcon}
-                >
-                    <Ionicons name="document-text-outline" size={32} color="#fc8404" />
-                    <Text style={styles.footerText}>Orden</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('UserManagement')}
-                    style={styles.footerIcon}
-                >
-                    <Ionicons name="people-outline" size={32} color="#fc8404" />
-                    <Text style={styles.footerText}>Usuario</Text>
-                </TouchableOpacity>
-            </View>
         </SafeAreaView>
     );
 }
