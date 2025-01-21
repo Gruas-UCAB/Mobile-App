@@ -15,11 +15,9 @@ import moment from 'moment';
 import { FontAwesome } from '@expo/vector-icons';
 import { API_KEY } from '../../enviroments';
 
-// TODO: Agregar Filtrado
-
 export default function HistoricOrderScreen() {
     const [orders, setOrders] = useState([]);
-    const [filter, setFilter] = useState('active');
+    const [filter, setFilter] = useState('all');
     const [userId, setUserId] = useState(null);
     const [userName, setUserName] = useState('');
     const [token, setToken] = useState('');
@@ -50,6 +48,7 @@ export default function HistoricOrderScreen() {
                     }
                 });
                 if (response.status === 200) {
+                    console.log('Orders:', response.data);
                     setOrders(response.data);
                 } else {
                     console.error('Error fetching orders:', response.status);
@@ -68,6 +67,13 @@ export default function HistoricOrderScreen() {
         }
     };
 
+    const filteredOrders = orders.filter(order => {
+        if (filter === 'all') return true;
+        if (filter === 'pagado') return order.orderStatus === 'pagado';
+        if (filter === 'cancelado') return order.orderStatus === 'cancelado';
+        return false;
+    });
+
     const renderOrder = ({ item }) => (
         <View style={styles.orderCard}>
             <View style={styles.orderHeader}>
@@ -84,9 +90,9 @@ export default function HistoricOrderScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
-                <FontAwesome name="close" size={18} color="#777" />
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
+                    <FontAwesome name="close" size={18} color="#777" />
+                </TouchableOpacity>
                 <View style={styles.headerLeftIcons}>
                 </View>
                 <Text style={styles.headerText}>Historial de Ordenes</Text>
@@ -94,8 +100,20 @@ export default function HistoricOrderScreen() {
                 </View>
             </View>
 
+            <View style={styles.filterContainer}>
+                <TouchableOpacity style={styles.filterButton} onPress={() => setFilter('all')}>
+                    <Text style={filter === 'all' ? styles.filterButtonTextActive : styles.filterButtonText}>Todas</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.filterButton} onPress={() => setFilter('pagado')}>
+                    <Text style={filter === 'pagado' ? styles.filterButtonTextActive : styles.filterButtonText}>Pagadas</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.filterButton} onPress={() => setFilter('cancelado')}>
+                    <Text style={filter === 'cancelado' ? styles.filterButtonTextActive : styles.filterButtonText}>Canceladas</Text>
+                </TouchableOpacity>
+            </View>
+
             <FlatList
-                data={orders}
+                data={filteredOrders}
                 keyExtractor={item => item.orderNumber}
                 renderItem={renderOrder}
                 contentContainerStyle={styles.listContent}

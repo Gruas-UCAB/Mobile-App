@@ -11,7 +11,7 @@ import { API_KEY } from '../../enviroments';
 const authenticateUser = async (email, password) => {
     try {
         const response = await axios.post(`${API_KEY}/users-ms/auth/login`, {
-            email,
+            email: email.toLowerCase(),
             password,
         });
 
@@ -43,7 +43,7 @@ export default function LoginScreen() {
     const handleLogin = async () => {
         const result = await authenticateUser(email, password);
         if (result) {
-            const { token, userId, name } = result; // Asegurarse de obtener 'name' de 'result'
+            const { token, userId, name } = result; 
             navigation.navigate('Dashboard', { token, userId, name });
         } else {
             Alert.alert('Error', 'Inicio de sesión fallido.');

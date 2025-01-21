@@ -5,6 +5,7 @@ import {
     FlatList,
     TouchableOpacity,
     Alert,
+    RefreshControl,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -17,20 +18,45 @@ import { FontAwesome } from '@expo/vector-icons';
 import { API_KEY } from '../../enviroments';
 import * as Location from 'expo-location';
 
+// TODO: Agregar una validacion para que cuando no haya ordenes no salga error 
+
 export default function DashboardScreen() {
     const [orders, setOrders] = useState([]);
     const [filter, setFilter] = useState('active');
     const [userId, setUserId] = useState(null);
     const [userName, setUserName] = useState('');
     const [token, setToken] = useState('');
+    const [refreshing, setRefreshing] = useState(false);
 
     const navigation = useNavigation();
+
+    const fetchOrders = async (id, userToken) => {
+        try {
+            console.log('Fetching orders with token:', userToken);
+            const response = await axios.get(`${API_KEY}/orders-ms/order/current-order-by-conductor/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            });
+            if (response.status === 200) {
+                console.log('Orders fetched successfully:', response.data);
+                // Ensure orders is an array
+                const ordersData = Array.isArray(response.data) ? response.data : [response.data];
+                setOrders(ordersData);
+            } else {
+                console.error('Error fetching orders:', response.status);
+            }
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+        }
+    };
 
     useEffect(() => {
         const fetchUserData = async () => {
             const id = await AsyncStorage.getItem('userId');
             const name = await AsyncStorage.getItem('name');
             const userToken = await AsyncStorage.getItem('userToken');
+            console.log('User data:', { id, name, userToken });
             if (id) {
                 setUserId(id);
                 setToken(userToken);
@@ -41,33 +67,25 @@ export default function DashboardScreen() {
             }
         };
 
-        const fetchOrders = async (id, userToken) => {
-            try {
-                console.log('Fetching orders with token:', userToken);
-                const response = await axios.get(`${API_KEY}/orders-ms/order/all-orders-by-conductor/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${userToken}`
-                    }
-                });
-                if (response.status === 200) {
-                    setOrders(response.data);
-                } else {
-                    console.error('Error fetching orders:', response.status);
-                }
-            } catch (error) {
-                console.error('Error fetching orders:', error);
-            }
-        };
-
         fetchUserData();
     }, []);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            handleRefreshLocation();
-        }, 600000); // 10 minutes in milliseconds
+            if (userId && token) {
+                fetchOrders(userId, token);
+            }
+        }, 360000);
 
-        return () => clearInterval(intervalId); // Clear interval on component unmount
+        return () => clearInterval(intervalId);
+    }, [userId, token]);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            handleRefreshLocation();
+        }, 600000);
+
+        return () => clearInterval(intervalId);
     }, [userId, token]);
 
     const handleRefreshLocation = async () => {
@@ -106,6 +124,12 @@ export default function DashboardScreen() {
         }
     };
 
+    const onRefresh = async () => {
+        setRefreshing(true);
+        await fetchOrders(userId, token);
+        setRefreshing(false);
+    };
+
     const renderOrder = ({ item }) => (
         <View style={styles.orderCard}>
             <View style={styles.orderHeader}>
@@ -116,6 +140,11 @@ export default function DashboardScreen() {
             <Text style={styles.orderText}>Estado: {item.orderStatus}</Text>
             <Text style={styles.orderText}>Tipo de Incidente: {item.incidentType}</Text>
             <Text style={styles.orderText}>Costo: ${item.cost}</Text>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('OrderDetails', { orderId: item.id })}>
+                    <Text style={styles.buttonText}>Ver más detalles</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 
@@ -137,9 +166,12 @@ export default function DashboardScreen() {
 
             <FlatList
                 data={orders}
-                keyExtractor={item => item.orderNumber}
+                keyExtractor={item => item.orderNumber.toString()}
                 renderItem={renderOrder}
                 contentContainerStyle={styles.listContent}
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }
                 ListEmptyComponent={
                     <View style={styles.emptyContainer}>
                         <Text style={styles.emptyText}>No tienes ordenes asignadas por el momento.</Text>
@@ -166,4 +198,3 @@ export default function DashboardScreen() {
         </SafeAreaView>
     );
 }
-

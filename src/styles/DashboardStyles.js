@@ -143,6 +143,70 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginTop: 4,
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+},
+acceptButton: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    borderRadius: 5,
+    flex: 1,
+    marginRight: 5,
+},
+rejectButton: {
+    backgroundColor: '#F44336',
+    padding: 10,
+    borderRadius: 5,
+    flex: 1,
+    marginLeft: 5,
+},
+buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
+},
+buttonContainer: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginTop: 10,
+},
+acceptButton: {
+  backgroundColor: '#4CAF50',
+  padding: 10,
+  borderRadius: 5,
+  flex: 1,
+  marginRight: 5,
+},
+rejectButton: {
+  backgroundColor: '#F44336',
+  padding: 10,
+  borderRadius: 5,
+  flex: 1,
+  marginLeft: 5,
+},
+buttonText: {
+  color: 'white',
+  textAlign: 'center',
+  fontWeight: 'bold',
+},
+cancelButton: {
+  backgroundColor: '#FF3D0A',
+  padding: 10,
+  borderRadius: 5,
+  margin: 5,
+},
+detailsButton: {
+  backgroundColor: '#007BFF',
+  padding: 10,
+  borderRadius: 5,
+  margin: 5,
+},
+buttonText: {
+  color: '#fff',
+  textAlign: 'center',
+},
 });
 
 export default styles;

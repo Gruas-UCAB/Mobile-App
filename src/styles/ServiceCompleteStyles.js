@@ -60,6 +60,29 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
     },
+    buttonRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+    },
+    buttonWrapper: {
+        flex: 1,
+        marginHorizontal: 5,
+    },
+    acceptButton: {
+        padding: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    cancelButton: {
+        padding: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    saveButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
   });
   
 export default styles;

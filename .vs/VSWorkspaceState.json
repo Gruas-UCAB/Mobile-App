@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\screens"
+    "\\src\\screens",
+    "\\src\\styles"
   ],
-  "SelectedNode": "\\tailwind.config.js",
+  "SelectedNode": "\\src\\screens\\ServiceCompletedScreen.js",
   "PreviewInSolutionExplorer": false
 }

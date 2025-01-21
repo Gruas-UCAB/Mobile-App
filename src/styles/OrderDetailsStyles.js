@@ -156,6 +156,17 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    inProcessButton: {
+        padding: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+        backgroundColor: '#FF7F0A',
+        marginTop: 10,
+    },
+    inProcessButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
   });
 
 export default styles;

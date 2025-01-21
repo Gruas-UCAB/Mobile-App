@@ -38,6 +38,7 @@ export default function OrderDetailsScreen({ route }) {
     });
 
     const [loading, setLoading] = useState(true);
+    const [rejectionReason, setRejectionReason] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [isOrderRejected, setIsOrderRejected] = useState(false);
     const [estimatedTime, setEstimatedTime] = useState(0);
@@ -148,18 +149,10 @@ export default function OrderDetailsScreen({ route }) {
             if (response.status === 200) {
                 Alert.alert('Éxito', 'La orden fue localizada exitosamente');
                 const orderData = response.data;
-                if (orderData.location) {
-                    const [latitude, longitude] = orderData.location.split(',').map(Number);
-                    setOrderLocation({ latitude, longitude });
-                } else {
-                    console.error('Error: orderData.location is undefined');
-                }
-                if (orderData.destination) {
-                    const [destLatitude, destLongitude] = orderData.destination.split(',').map(Number);
-                    setDestinationLocation({ latitude: destLatitude, longitude: destLongitude });
-                } else {
-                    console.error('Error: orderData.destination is undefined');
-                }
+                const [latitude, longitude] = orderData.location.split(',').map(Number);
+                setOrderLocation({ latitude, longitude });
+                const [destLatitude, destLongitude] = orderData.destination.split(',').map(Number);
+                setDestinationLocation({ latitude: destLatitude, longitude: destLongitude });
             } else {
                 Alert.alert('Error', 'No se pudo localizar la orden');
             }
@@ -167,7 +160,7 @@ export default function OrderDetailsScreen({ route }) {
             Alert.alert('Error', 'Ocurrió un error al localizar la orden');
             console.error('Error locating order:', error);
         }
-    }, [navigation, orderId]);    
+    }, [navigation, orderId]);
 
     const handleReject = async () => {
         try {
@@ -190,14 +183,14 @@ export default function OrderDetailsScreen({ route }) {
             Alert.alert('Error', 'No se pudo cancelar la orden.');
         }
         setModalVisible(true);
-        navigation.navigate('ServiceCompleted', { orderId });
+        navigation.navigate('ServiceCompleted');
     };
 
     const handleAcceptOrder = async () => {
         try {
             const userToken = await AsyncStorage.getItem('userToken');
             const response = await axios.patch(`${API_KEY}/orders-ms/order/toggle-accept/${orderId}`, {
-                aceptado: true
+                accepted: true
             }, {
                 headers: {
                     Authorization: `Bearer ${userToken}`,
@@ -206,8 +199,8 @@ export default function OrderDetailsScreen({ route }) {
             });
 
             if (response.status === 200) {
-                Alert.alert('Éxito', 'Orden aceptado correctamente.');
-                setOrder({ ...order, orderStatus: 'aceptado' });
+                Alert.alert('Éxito', 'Orden aceptada correctamente.');
+                setOrder({ ...order, orderStatus: 'accepted' });
             } else {
                 console.error('Error aceptando la orden:', response.status);
             }
@@ -229,7 +222,7 @@ export default function OrderDetailsScreen({ route }) {
 
             if (response.status === 200) {
                 Alert.alert('Éxito', 'La orden está en proceso.');
-                navigation.navigate('ServiceCompleted', { orderId });
+                setOrder({ ...order, orderStatus: 'in process' });
             } else {
                 console.error('Error al iniciar el proceso de la orden:', response.status);
             }
@@ -283,7 +276,7 @@ export default function OrderDetailsScreen({ route }) {
                     description={order ? order.destination : ''}
                     pinColor="blue"
                 />
-                {(order && (order.orderStatus === 'por aceptar' || order.orderStatus === 'aceptado' || order.orderStatus === 'in process')) && (
+                {(order && (order.orderStatus === 'por aceptar' || order.orderStatus === 'accepted' || order.orderStatus === 'in process')) && (
                     <Marker
                         coordinate={{ latitude: conductorLocation.latitude, longitude: conductorLocation.longitude }}
                         title="Ubicación del Conductor"
@@ -298,7 +291,7 @@ export default function OrderDetailsScreen({ route }) {
                     strokeColor="#000"
                     strokeWidth={3}
                 />
-                {(order && (order.orderStatus === 'por aceptar' || order.orderStatus === 'aceptado' || order.orderStatus === 'in process')) && (
+                {(order && (order.orderStatus === 'por aceptar' || order.orderStatus === 'accepted' || order.orderStatus === 'in process')) && (
                     <Polyline
                         coordinates={[
                             { latitude: conductorLocation.latitude, longitude: conductorLocation.longitude },
@@ -364,21 +357,14 @@ export default function OrderDetailsScreen({ route }) {
                                     </TouchableOpacity>
                                 </>
                             ) : (
-                                <>
-                                    {order && order.orderStatus === 'aceptado' && (
-                                        <TouchableOpacity
-                                            style={[styles.startButton, isOrderRejected && styles.disabledButton]}
-                                            onPress={handleStart}
-                                            disabled={isOrderRejected}
-                                        >
-                                            <FontAwesome name="location-arrow" size={24} color="white" />
-                                            <Text style={styles.startButtonText}>Localizada</Text>
-                                        </TouchableOpacity>
-                                    )}
-                                    {order && order.orderStatus === 'en proceso' && (
-                                        navigation.navigate('ServiceCompleted', { orderId })
-                                    )}
-                                </>
+                                <TouchableOpacity
+                                    style={[styles.startButton, isOrderRejected && styles.disabledButton]}
+                                    onPress={handleStart}
+                                    disabled={isOrderRejected}
+                                >
+                                    <FontAwesome name="location-arrow" size={24} color="white" />
+                                    <Text style={styles.startButtonText}>Localizado</Text>
+                                </TouchableOpacity>
                             )}
                         </>
                     )}
