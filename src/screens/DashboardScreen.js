@@ -4,6 +4,7 @@ import {
     Text,
     FlatList,
     TouchableOpacity,
+    Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +15,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { FontAwesome } from '@expo/vector-icons';
 import { API_KEY } from '../../enviroments';
+import * as Location from 'expo-location';
 
 export default function DashboardScreen() {
     const [orders, setOrders] = useState([]);
@@ -60,8 +62,48 @@ export default function DashboardScreen() {
         fetchUserData();
     }, []);
 
-    const handleRefreshLocation = () => {
-        
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            handleRefreshLocation();
+        }, 600000); // 10 minutes in milliseconds
+
+        return () => clearInterval(intervalId); // Clear interval on component unmount
+    }, [userId, token]);
+
+    const handleRefreshLocation = async () => {
+        try {
+            const { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                Alert.alert('Error', 'Se requiere permiso para acceder a la ubicación.');
+                return;
+            }
+
+            const loc = await Location.getCurrentPositionAsync({
+                accuracy: Location.Accuracy.High,
+            });
+
+            const locationData = `${loc.coords.latitude},${loc.coords.longitude}`;
+
+            console.log('Enviando ubicación:', locationData);
+
+            const response = await axios.patch(`${API_KEY}/providers-ms/provider/conductors/conductor/location/${userId}`, {
+                location: locationData
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+                Alert.alert('Ubicación Enviada', 'La ubicación se ha enviado correctamente.');
+            } else {
+                console.error('Error enviando la ubicación:', response.status);
+            }
+        } catch (error) {
+            console.error('Error enviando la ubicación:', error);
+            Alert.alert('Error', 'No se pudo enviar la ubicación.');
+        }
     };
 
     const renderOrder = ({ item }) => (
@@ -124,3 +166,4 @@ export default function DashboardScreen() {
         </SafeAreaView>
     );
 }
+
