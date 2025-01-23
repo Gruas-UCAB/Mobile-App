@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomeScreen from '../screens/WelcomeScreen';
@@ -17,19 +17,6 @@ import HistoricOrderScreen from '../screens/HistoricOrderScreen';
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
-    const user = true; 
-    if (!user) {
-        return (
-            <NavigationContainer>
-                <Stack.Navigator initialRouteName='Welcome'>
-                    <Stack.Screen name="Welcome" options={{ headerShown: false }} component={WelcomeScreen} />
-                    <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
-                    <Stack.Screen name="ChangePassword" options={{ headerShown: false }} component={ChangePasswordScreen} />
-                    <Stack.Screen name="UserManagement" options={{ headerShown: false }} component={UserManagement} />
-                </Stack.Navigator>
-            </NavigationContainer>
-        )
-    } else {
         return (
             <NavigationContainer>
                 <Stack.Navigator initialRouteName='Welcome'>
@@ -48,5 +35,4 @@ export default function AppNavigation() {
                 </Stack.Navigator>
             </NavigationContainer>
         )
-    }
 }

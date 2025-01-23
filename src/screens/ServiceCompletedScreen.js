@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { API_KEY } from '../../enviroments';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function ServiceCompletedScreen({ route }) {
     const [isArrived, setIsArrived] = useState(false);
@@ -15,7 +16,7 @@ export default function ServiceCompletedScreen({ route }) {
     const [hasAdditionalCosts, setHasAdditionalCosts] = useState(false);
 
     const navigation = useNavigation();
-    const { orderId } = route.params; // Asegúrate de recibir orderId aquí
+    const { orderId } = route.params;
 
     const toggleArrived = () => setIsArrived(previousState => !previousState);
     const toggleServiceCompleted = () => setIsServiceCompleted(previousState => !previousState);
@@ -68,6 +69,10 @@ export default function ServiceCompletedScreen({ route }) {
                 style={styles.loginImage}
                 resizeMode="contain"
             />
+            
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
+                <FontAwesome name="close" size={18} color="#777" />
+            </TouchableOpacity>
 
             <Text style={styles.header}>Confirmación de Servicio</Text>
 
@@ -92,13 +97,6 @@ export default function ServiceCompletedScreen({ route }) {
                     thumbColor={isServiceCompleted ? "#fff" : "#f4f3f4"}
                 />
             </View>
-
-            <TouchableOpacity onPress={() => navigation.navigate('AditionalCost')} style={styles.additionalCostButton}>
-                <View style={styles.row}>
-                    <Ionicons name={hasAdditionalCosts ? 'cash' : 'cash-outline'} size={24} color="#777" />
-                    <Text style={styles.text}>Agregar costos adicionales</Text>
-                </View>
-            </TouchableOpacity>
 
             <View style={styles.buttonRow}>
                 <TouchableOpacity onPress={handleCancel} activeOpacity={0.7} style={styles.buttonWrapper}>

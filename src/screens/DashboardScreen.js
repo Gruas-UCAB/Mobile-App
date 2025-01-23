@@ -18,11 +18,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import { API_KEY } from '../../enviroments';
 import * as Location from 'expo-location';
 
-// TODO: Agregar una validacion para que cuando no haya ordenes no salga error 
-
 export default function DashboardScreen() {
     const [orders, setOrders] = useState([]);
-    const [filter, setFilter] = useState('active');
     const [userId, setUserId] = useState(null);
     const [userName, setUserName] = useState('');
     const [token, setToken] = useState('');
@@ -40,14 +37,13 @@ export default function DashboardScreen() {
             });
             if (response.status === 200) {
                 console.log('Orders fetched successfully:', response.data);
-                // Ensure orders is an array
                 const ordersData = Array.isArray(response.data) ? response.data : [response.data];
                 setOrders(ordersData);
             } else {
-                console.error('Error fetching orders:', response.status);
+                console.error('No hay ordenes Dispoibles:', response.status);
             }
         } catch (error) {
-            console.error('Error fetching orders:', error);
+            console.error('No hay ordenes disponibles:', error);
         }
     };
 

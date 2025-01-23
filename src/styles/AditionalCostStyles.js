@@ -6,6 +6,15 @@ const styles = StyleSheet.create({
       padding: 20,
       backgroundColor: '#fff',
     },
+    exitButton: {
+      position: 'absolute',
+      top: 40, 
+      left: 20,
+      zIndex: 10, 
+      backgroundColor: '#fff',
+      padding: 10,
+      borderRadius: 90,
+    },
     loginImage: {
       width: 150,
       height: 150,
@@ -74,6 +83,30 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 16,
       fontWeight: 'bold',
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    radioButtonContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    radioButtonLabel: {
+        marginLeft: 10,
+    },
+    submitButton: {
+        backgroundColor: '#FF7F0A',
+        padding: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    submitButtonText: {
+        color: 'white',
+        fontSize: 16,
     },
   });
   

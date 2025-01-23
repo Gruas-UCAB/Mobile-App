@@ -71,6 +71,8 @@ export default function HistoricOrderScreen() {
         if (filter === 'all') return true;
         if (filter === 'pagado') return order.orderStatus === 'pagado';
         if (filter === 'cancelado') return order.orderStatus === 'cancelado';
+        if (filter === 'finalizado') return order.orderStatus === 'finalizado';
+
         return false;
     });
 
@@ -109,6 +111,9 @@ export default function HistoricOrderScreen() {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.filterButton} onPress={() => setFilter('cancelado')}>
                     <Text style={filter === 'cancelado' ? styles.filterButtonTextActive : styles.filterButtonText}>Canceladas</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.filterButton} onPress={() => setFilter('finalizado')}>
+                    <Text style={filter === 'finalizado' ? styles.filterButtonTextActive : styles.filterButtonText}>Finalizadas</Text>
                 </TouchableOpacity>
             </View>
 
