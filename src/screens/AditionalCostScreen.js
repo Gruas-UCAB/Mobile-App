@@ -64,7 +64,7 @@ export default function AditionalCostScreen({ route }) {
                         'Content-Type': 'application/json'
                     }
                 });
-    
+
                 if (response.status === 200) {
                     const updatedCosts = extraCosts.map(cost =>
                         cost.id === editingCost.id ? { ...cost, price: parseFloat(newPrice) } : cost
@@ -127,6 +127,9 @@ export default function AditionalCostScreen({ route }) {
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
+                <FontAwesome name="close" size={18} color="#000" />
+            </TouchableOpacity>
             <Image
                 source={require('../../assets/icons/cost.png')}
                 style={styles.loginImage}
@@ -140,8 +143,10 @@ export default function AditionalCostScreen({ route }) {
                             value={cost.id}
                             status={selectedCost?.id === cost.id ? 'checked' : 'unchecked'}
                             onPress={() => handleSelectCost(cost)}
+                            color="#FF7F0A" // Cambia el color aquí
                         />
-                        <Text style={styles.radioButtonLabel}>{cost.description} - ${cost.price}</Text>
+                        <Text style={styles.radioButtonLabel}>{cost.description}</Text>
+                        <Text style={styles.radioButtonLabel}>{cost.price}</Text>
                         <TouchableOpacity onPress={() => handleEditCost(cost)}>
                             <FontAwesome name="pencil" size={24} color="black" />
                         </TouchableOpacity>

@@ -7,12 +7,24 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\screens\\AditionalCostScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\ServiceCompletedScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\screens\\ServiceCompletedScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\styles\\AditionalCostStyles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\styles\\AditionalCostStyles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\OrderDetailsScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\screens\\OrderDetailsScreen.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\styles\\OrderDetailsStyles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\styles\\OrderDetailsStyles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\handlers\\orderHandler.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\orderHandler.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\config\\firebase.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:config\\firebase.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,39 +50,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AditionalCostStyles.js",
-              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\styles\\AditionalCostStyles.js",
-              "RelativeDocumentMoniker": "src\\styles\\AditionalCostStyles.js",
-              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\styles\\AditionalCostStyles.js",
-              "RelativeToolTip": "src\\styles\\AditionalCostStyles.js",
-              "ViewState": "AgIAAD4AAAAAAAAAAADwv20AAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-01-23T16:11:23.761Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ServiceCompletedScreen.js",
-              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\ServiceCompletedScreen.js",
-              "RelativeDocumentMoniker": "src\\screens\\ServiceCompletedScreen.js",
-              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\ServiceCompletedScreen.js",
-              "RelativeToolTip": "src\\screens\\ServiceCompletedScreen.js",
-              "ViewState": "AgIAAAwAAAAAAAAAAADwv4oAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-01-23T15:21:46.601Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "AditionalCostScreen.js",
               "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\AditionalCostScreen.js",
               "RelativeDocumentMoniker": "src\\screens\\AditionalCostScreen.js",
               "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\AditionalCostScreen.js",
               "RelativeToolTip": "src\\screens\\AditionalCostScreen.js",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAIwKkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAAAK4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-01-23T03:44:26.284Z",
+              "WhenOpened": "2025-01-23T22:52:58.404Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AditionalCostStyles.js",
+              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\styles\\AditionalCostStyles.js",
+              "RelativeDocumentMoniker": "src\\styles\\AditionalCostStyles.js",
+              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\styles\\AditionalCostStyles.js",
+              "RelativeToolTip": "src\\styles\\AditionalCostStyles.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-01-23T22:52:57.453Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrderDetailsStyles.js",
+              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\styles\\OrderDetailsStyles.js",
+              "RelativeDocumentMoniker": "src\\styles\\OrderDetailsStyles.js",
+              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\styles\\OrderDetailsStyles.js",
+              "RelativeToolTip": "src\\styles\\OrderDetailsStyles.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-01-23T21:48:44.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "firebase.js",
+              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\config\\firebase.js",
+              "RelativeDocumentMoniker": "config\\firebase.js",
+              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\config\\firebase.js",
+              "RelativeToolTip": "config\\firebase.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-01-23T21:29:28.682Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "orderHandler.js",
+              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\handlers\\orderHandler.js",
+              "RelativeDocumentMoniker": "src\\handlers\\orderHandler.js",
+              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\handlers\\orderHandler.js",
+              "RelativeToolTip": "src\\handlers\\orderHandler.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-01-23T21:26:04.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderDetailsScreen.js",
+              "DocumentMoniker": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\OrderDetailsScreen.js",
+              "RelativeDocumentMoniker": "src\\screens\\OrderDetailsScreen.js",
+              "ToolTip": "C:\\Users\\ampar\\Desktop\\1. Proyecto Desarrollo\\Mobile-App\\src\\screens\\OrderDetailsScreen.js",
+              "RelativeToolTip": "src\\screens\\OrderDetailsScreen.js",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAwwLEAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-01-23T21:24:40.136Z",
               "EditorCaption": ""
             }
           ]

@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       color: '#333',
     },
+    exitButton: {
+      left: 20,
+      zIndex: 10, 
+      padding: 10,
+    },
     loginImage: {
       width: 200,
       height: 200,

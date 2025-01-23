@@ -8,12 +8,10 @@ const styles = StyleSheet.create({
     },
     exitButton: {
       position: 'absolute',
-      top: 40, 
+      marginTop: 40, 
       left: 20,
       zIndex: 10, 
-      backgroundColor: '#fff',
       padding: 10,
-      borderRadius: 90,
     },
     loginImage: {
       width: 150,
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     submitButtonText: {
-      color: 'white',
+      color: 'black',
       fontSize: 16,
       fontWeight: 'bold',
     },
@@ -77,10 +75,9 @@ const styles = StyleSheet.create({
       borderRadius: 8,
       paddingVertical: 15,
       alignItems: 'center',
-      marginTop: 20,
     },
     saveButtonText: {
-      color: '#fff',
+      color: '#000',
       fontSize: 16,
       fontWeight: 'bold',
     },
@@ -96,6 +93,7 @@ const styles = StyleSheet.create({
     },
     radioButtonLabel: {
         marginLeft: 10,
+        color: '#000',
     },
     submitButton: {
         backgroundColor: '#FF7F0A',

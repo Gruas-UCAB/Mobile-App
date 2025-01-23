@@ -64,16 +64,15 @@ export default function ServiceCompletedScreen({ route }) {
     return (
         <View style={styles.container}>
 
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
+                <FontAwesome name="close" size={18} color="#000" />
+            </TouchableOpacity>
             <Image
                 source={require('../../assets/icons/confirm.png')}
                 style={styles.loginImage}
                 resizeMode="contain"
             />
             
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.goBack()}>
-                <FontAwesome name="close" size={18} color="#777" />
-            </TouchableOpacity>
-
             <Text style={styles.header}>Confirmación de Servicio</Text>
 
             <View style={styles.row}>

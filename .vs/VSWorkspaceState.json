@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\handlers",
     "\\src\\navigation",
     "\\src\\screens",
     "\\src\\styles"
   ],
-  "SelectedNode": "\\.gitignore",
+  "SelectedNode": "\\src\\screens\\AditionalCostScreen.js",
   "PreviewInSolutionExplorer": false
 }

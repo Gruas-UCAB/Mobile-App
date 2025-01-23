@@ -3,92 +3,202 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F7FA',
+    backgroundColor: '#e67f02',
   },
   headerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    backgroundColor: '#ffffff', 
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    elevation: 3,
+    justifyContent: 'space-between',
+    paddingTop: 50,
+    paddingHorizontal: 20,
   },
-  headerLeftIcons: {
+  notificationContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: '#e8993a',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    
+  },
+  badge: {
+    position: 'absolute',
+    top: 4,
+    right: 4,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'red',
+  },
+  userSection: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  iconButton: {
-    padding: 8,
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
   },
-  headerText: {
-    color: '#333333',
-    fontSize: 22,
-    fontWeight: '700',
+  textContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  refreshButtonContainer: {
+    marginTop: 30,
+    marginBottom: 40,
+    paddingHorizontal: 20,
+  },
+  refreshButton: {
+    backgroundColor: '#e8993a',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    width: '100%',
+  },
+  refreshButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  userName: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    marginBottom: 2,
+  },
+  welcomeText: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 20,
+    opacity: 0.9,
   },
   headerRightIcons: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  filterContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 12,
-    backgroundColor: '#ffffff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+  iconButton: {
+    marginLeft: 10,
   },
-  filterButton: {
-    paddingVertical: 8,
+  bodyContainer: {
+    borderTopRightRadius:40,
+    borderTopLeftRadius:40,
+    backgroundColor:'white',
+    paddingVertical: 55,
     paddingHorizontal: 20,
-    borderRadius: 20,
-    backgroundColor: '#E0E0E0',
+    width: '100%',
+    height: '100%',
   },
-  activeFilterButton: {
-    backgroundColor: '#ff7f0a',
-  },
-  filterText: {
-    color: '#333333',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  activeFilterText: {
-    color: '#ffffff',
+  textoDeOrden: {
+    color: '#000',
+    fontSize: 20,
+    marginBottom: 6,
+    paddingHorizontal: 26,
+    fontWeight: 'bold',
   },
   listContent: {
     paddingHorizontal: 16,
     paddingTop: 10,
     paddingBottom: 20,
   },
-  orderCard: {
-    backgroundColor: '#ffffff', 
-    borderRadius: 16,
-    padding: 16,
+  orderCardContainer: {
+    backgroundColor: '#fff',
+    marginHorizontal: 16,
     marginVertical: 8,
+    borderRadius: 12,
+    padding: 16,
+  
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
+
+    elevation: 7,
   },
-  orderHeader: {
+  
+  orderTopRow: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 8,
   },
-  orderTitle: {
-    color: '#333333',
-    fontSize: 18,
-    fontWeight: '700',
-    marginLeft: 8,
-  },
-  orderText: {
-    color: '#555555',
+  
+  orderNumber: {
     fontSize: 16,
-    marginBottom: 6,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  
+  statusBadge: {
+    backgroundColor: '#49e83a',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 6,
+  },
+  
+  statusBadgeText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  
+  divider: {
+    height: 1,
+    backgroundColor: '#EAEAEA',
+    marginVertical: 8,
+  },
+  
+  orderMiddleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 4,
+  },
+  
+  locationColumn: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  
+  locationName: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  
+  locationDate: {
+    fontSize: 14,
+    color: '#888',
+  },
+  orderBottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  userInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  userImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 8,
+  },
+  accidentType: {
+    textTransform: 'capitalize',
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    flexWrap: 'wrap',
+  },
+
+  userRole: {
+    fontSize: 12,
+    color: '#888',
   },
   statusContainer: {
     flexDirection: 'row',
@@ -130,83 +240,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOpacity: 0.11,
+    shadowRadius: 8,
+    elevation: 8,
   },
   footerIcon: {
     alignItems: 'center',
   },
   footerText: {
-    color: '#FF3D0A',
-    fontSize: 14,
-    fontWeight: '600',
+    color: '#e67f02',
+    fontSize: 12,
+    fontWeight: '800',
     marginTop: 4,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10,
-},
-acceptButton: {
-    backgroundColor: '#4CAF50',
-    padding: 10,
-    borderRadius: 5,
-    flex: 1,
-    marginRight: 5,
-},
-rejectButton: {
-    backgroundColor: '#F44336',
-    padding: 10,
-    borderRadius: 5,
-    flex: 1,
-    marginLeft: 5,
-},
-buttonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: 'bold',
-},
-buttonContainer: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  marginTop: 10,
-},
-acceptButton: {
-  backgroundColor: '#4CAF50',
-  padding: 10,
-  borderRadius: 5,
-  flex: 1,
-  marginRight: 5,
-},
-rejectButton: {
-  backgroundColor: '#F44336',
-  padding: 10,
-  borderRadius: 5,
-  flex: 1,
-  marginLeft: 5,
-},
-buttonText: {
-  color: 'white',
-  textAlign: 'center',
-  fontWeight: 'bold',
-},
-cancelButton: {
-  backgroundColor: '#FF3D0A',
-  padding: 10,
-  borderRadius: 5,
-  margin: 5,
-},
-detailsButton: {
-  backgroundColor: '#007BFF',
-  padding: 10,
-  borderRadius: 5,
-  margin: 5,
-},
-buttonText: {
-  color: '#fff',
-  textAlign: 'center',
-},
+
 });
 
 export default styles;

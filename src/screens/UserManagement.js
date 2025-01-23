@@ -37,11 +37,9 @@ export default function UserManagement() {
                     source={{ uri: 'https://img.icons8.com/?size=100&id=42215&format=png&color=000000' }}
                     style={styles.profileImage}
                 />
-                <Text style={styles.profileName}>Myke Tyson</Text>
-                <Text style={styles.profileId}>ABC-1234</Text>
             </View>
 
-            <View>
+            {/* <View>
                 <Text style={styles.sectionTitle}>Preferencias</Text>
                 <View style={styles.preferenceOption}>
                     <View style={styles.optionContent}>
@@ -57,7 +55,7 @@ export default function UserManagement() {
                     </View>
                     <Switch value={emailNotifications} onValueChange={setEmailNotifications} />
                 </View>
-            </View>
+            </View> */}
 
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>General</Text>

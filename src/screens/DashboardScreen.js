@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Alert,
     RefreshControl,
+    Image
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -126,40 +127,113 @@ export default function DashboardScreen() {
         setRefreshing(false);
     };
 
-    const renderOrder = ({ item }) => (
-        <View style={styles.orderCard}>
-            <View style={styles.orderHeader}>
-                <Ionicons name="document-text-outline" size={20} color="#FF3D0A" />
-                <Text style={styles.orderTitle}>Orden: {item.orderNumber}</Text>
+    const renderOrder = ({ item }) => {
+        return (
+          <TouchableOpacity 
+            style={styles.orderCardContainer} 
+            onPress={() => navigation.navigate('OrderDetails', { orderId: item.id })}
+            activeOpacity={0.9}
+          >
+            <View style={styles.orderTopRow}>
+              <Text style={styles.orderNumber}>#{item.orderNumber}</Text>
+              <View style={styles.statusBadge}>
+                <Text style={styles.statusBadgeText}>
+                  {item.orderStatus}
+                </Text>
+              </View>
             </View>
-            <Text style={styles.orderText}>Fecha: {moment(item.orderDate).format('DD/MM/YYYY')}</Text>
-            <Text style={styles.orderText}>Estado: {item.orderStatus}</Text>
-            <Text style={styles.orderText}>Tipo de Incidente: {item.incidentType}</Text>
-            <Text style={styles.orderText}>Costo: ${item.cost}</Text>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('OrderDetails', { orderId: item.id })}>
-                    <Text style={styles.buttonText}>Ver más detalles</Text>
-                </TouchableOpacity>
+      
+            <View style={styles.divider} />
+      
+            <View style={styles.orderMiddleRow}>
+
+              <View style={styles.locationColumn}>
+                <Text style={styles.locationName}>
+                  {'Costo'}
+                </Text>
+                <Text style={styles.locationDate}>
+                  ${item.cost}
+                </Text>
+              </View>
+      
+              <Ionicons
+                name="car-outline"
+                size={20}
+                color="#000"
+                style={{ marginHorizontal: 10 }}
+              />
+      
+              <View style={styles.locationColumn}>
+                <Text style={styles.locationName}>
+                  {"Fecha"}
+                </Text>
+                <Text style={styles.locationDate}>
+                  {moment(item.orderDate).format('DD/MM/YYYY')}
+                </Text>
+              </View>
             </View>
-        </View>
-    );
+      
+            <View style={styles.divider} />
+      
+            <View style={styles.orderBottomRow}>
+              <View style={styles.userInfo}>
+                <Image
+                  source={require('../../assets/grua.png')}
+                  style={styles.userImage}
+                />
+                <View>
+                  <Text style={styles.accidentType}>
+                    {item.incidentType}
+                  </Text>
+                  <Text style={styles.userRole}>Ver Mas Detalles</Text>
+                </View>
+              </View>
+      
+              <Ionicons
+                name="chevron-forward"
+                size={24}
+                color="#000"
+              />
+            </View>
+          </TouchableOpacity>
+        );
+      };
+      
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
-                <View style={styles.headerLeftIcons}>
-                    <TouchableOpacity onPress={handleRefreshLocation} style={styles.iconButton}>
-                        <FontAwesome name="map" size={18} color="#FF3D0A" />
-                    </TouchableOpacity>
+                {/* Sección izquierda con foto y texto */}
+                <View style={styles.userSection}>
+                    <Image
+                        source={require('../../assets/user-4.jpg')}
+                        style={styles.profileImage}
+                    />
+                    <View style={styles.textContainer}>
+                        <Text style={styles.userName}>{userName},</Text>
+                        <Text style={styles.welcomeText}>Bienvenido nuevamente!</Text>
+                    </View>
                 </View>
-                <Text style={styles.headerText}>Bienvenido, {userName}</Text>
+                {/* Sección derecha con íconos */}
                 <View style={styles.headerRightIcons}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={styles.iconButton}>
-                        <Ionicons name="notifications-outline" size={28} color="#FF3D0A" />
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Notifications')}
+                        style={styles.notificationContainer}>
+                        <Ionicons name="notifications-outline" size={25} color="#fff" />
+                        <View style={styles.badge} />
                     </TouchableOpacity>
                 </View>
             </View>
 
+            {/* Botón grande para refrescar ubicación */}
+            <View style={styles.refreshButtonContainer}>
+            <TouchableOpacity style={styles.refreshButton} onPress={handleRefreshLocation}>
+                <Text style={styles.refreshButtonText}>Refrescar ubicación</Text>
+            </TouchableOpacity>
+            </View>
+
+            <View style={styles.bodyContainer}>
+                <Text style={styles.textoDeOrden}>Ordenes Recientes</Text>
             <FlatList
                 data={orders}
                 keyExtractor={item => item.orderNumber.toString()}
@@ -174,20 +248,21 @@ export default function DashboardScreen() {
                     </View>
                 }
             />
+            </View>
 
             <View style={styles.footerContainer}>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('HistoricOrder')}
                     style={styles.footerIcon}
                 >
-                    <Ionicons name="document-text-outline" size={32} color="#fc8404" />
+                    <Ionicons name="document-text-outline" size={25} color="#fc8404" />
                     <Text style={styles.footerText}>Orden</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('UserManagement')}
                     style={styles.footerIcon}
                 >
-                    <Ionicons name="people-outline" size={32} color="#fc8404" />
+                    <Ionicons name="person-outline" size={25} color="#fc8404" />
                     <Text style={styles.footerText}>Usuario</Text>
                 </TouchableOpacity>
             </View>

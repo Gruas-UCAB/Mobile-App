@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_KEY } from '../../enviroments';
+import { ArrowLeftIcon } from 'react-native-heroicons/solid';
 
 const authenticateUser = async (email, password) => {
     try {
@@ -52,6 +53,25 @@ export default function LoginScreen() {
 
     return (
         <View color={'#fff'} style={styles.container}>
+                  <TouchableOpacity 
+        onPress={() => navigation.goBack()} 
+        style={styles.backButton}
+      >
+        <ArrowLeftIcon size={24} color="#000" style={styles.backIcon} />
+        <Text style={styles.backText}>Atrás</Text>
+      </TouchableOpacity>
+
+      <Image
+        source={require('../../assets/images/logo.png')}
+        style={styles.loginImage}
+        resizeMode="contain"
+      />
+
+      <View style={styles.logoContainer}>
+        <Text style={styles.title}>UCAB</Text>
+        <Text style={styles.subtitle}>Bienvenido nuevamente</Text>
+      </View>
+
             <View style={styles.inputContainer}>
                 <View style={styles.inputWrapper}>
                     <MaterialCommunityIcons name="account-outline" size={20} color="#777" />
@@ -93,6 +113,12 @@ export default function LoginScreen() {
                     <Text style={styles.saveButtonText}>Iniciar Sesión</Text>
                 </LinearGradient>
             </TouchableOpacity>
+
+            <View style={styles.footer}>
+                <TouchableOpacity onPress={()=> navigation.navigate('RecoveryPassword')}>
+                <Text style={styles.footerText}>recuperar contraseña?</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
